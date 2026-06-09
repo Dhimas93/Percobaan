@@ -43,8 +43,9 @@
 						<li><a href="reservation.html">Reservation</a></li>
 						<li><a href="about.html">About</a></li>
 						<li><a href="contact.html">Contact</a></li>
-						<li><a href="login.html" class="btn-login" style="background: #d4af7a; color: #fff; padding: 5px 15px; border-radius: 4px; margin-left: 10px;">Login</a></li>
-						<li style="margin-left: 10px;"><p id="userInfo" style="color: #d4af7a; margin: 0; display: inline-block;">Belum login</p></li>
+						<li id="authArea" style="margin-left: 10px; display: inline-block; vertical-align: middle;">
+							<a href="login.html" class="btn-login" style="background: #d4af7a; color: #fff; padding: 5px 15px; border-radius: 4px;">Login</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -71,12 +72,44 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5 animate-box img-to-responsive" data-animate-effect="fadeInLeft" style="text-align: center;">
-                        <img src="images/person_1.jpeg" alt="Testimony" style="max-height: 300px; width: auto; border-radius: 10px; object-fit: cover; display: block; margin: 0 auto;">
-                </div>
+					<img src="images/person_1.jpeg" alt="Testimony" style="max-height: 300px; width: auto; border-radius: 10px; object-fit: cover; display: block; margin: 0 auto;">
+				</div>
 				<div class="col-md-5 col-md-push-1 animate-box">
 					<div class="section-heading">
 						<h2>Ini saya</h2>
 						<p>Seorang pelajar yang biasa saja tetapi selalu berusaha untuk mengejar semua yang diinginya. Perkenalkan nama Saya Mulyawan Adhimas Wibowo biasa di panggil Dhimas, sekarang saya berumur 16 tahun dan saya harap saya bisa menjadi mahasiswa ITB setelah lulus dari Delayota</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-featured-menu" class="fh5co-section" style="background: #fff; padding: 4em 0;">
+		<div class="container">
+			<div class="row style="margin-bottom: 20px;">
+				<div class="col-md-12 text-center section-heading animate-box">
+					<h2>Lokasi & Musik Favorit</h2>
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 subtext">
+							<p>Berikut adalah peta lokasi sekolah saya di Delayota beserta video musik favorit dari Daniel Caesar.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6 animate-box" style="margin-bottom: 30px;">
+					<div style="border: 4px solid #d4af7a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.03661102551!2d110.38555817589601!3d-7.785934577255955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59960249767f%3A0x6bda19da52beea8c!2sSMA%20Negeri%208%20Yogyakarta!5e0!3m2!1sid!2sid!4v1717942000000!5m2!1sid!2sid" 
+							width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					</div>
+				</div>
+
+				<div class="col-md-6 animate-box" style="margin-bottom: 30px;">
+					<div style="border: 4px solid #d4af7a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+						<iframe width="100%" height="350" src="https://www.youtube.com/embed/g7fPSTp4f00" 
+							title="Daniel Caesar - Who Care / Best Part Music Video" frameborder="0" 
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 					</div>
 				</div>
 			</div>
@@ -106,6 +139,26 @@
 	<script src="js/jquery.flexslider-min.js"></script>
 	<script src="js/main.js"></script>
 
-	<script src="login/js/welcome.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const isLoggedIn = localStorage.getItem('isLoggedIn');
+			const username = localStorage.getItem('username');
+			const authArea = document.getElementById('authArea');
+
+			if (isLoggedIn === 'true' && username) {
+				// Ubah area login menjadi teks salam dan tombol logout sesuai instruksi LKPD
+				authArea.innerHTML = `
+					<span style="color: #d4af7a; font-weight: bold; margin-right: 15px; font-size: 16px;">Halo, ${username}!</span>
+					<button id="logoutBtn" style="background: #c9302c; color: #fff; padding: 4px 12px; border: none; border-radius: 4px; font-size: 13px; cursor: pointer;">Logout</button>
+				`;
+
+				// Fungsi ketika tombol logout ditekan
+				document.getElementById('logoutBtn').addEventListener('click', function() {
+					localStorage.clear(); // Bersihkan sesi login
+					window.location.reload(); // Segarkan halaman kembali semula
+				});
+			}
+		});
+	</script>
 	</body>
 </html>
